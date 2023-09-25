@@ -1,7 +1,8 @@
-import pandas as pd
+#import pandas as pd
 import matplotlib as mb;
-import sklearn as sk;
+#import sklearn as sk;
 import random
+import sys
 
 class relation_safety_politics:
     #available_operation = ["Чтение", "Запись", "Модификация"]
