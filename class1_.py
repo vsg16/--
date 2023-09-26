@@ -79,7 +79,6 @@ class relation_safety_politics:
                 userId = input("Введите идентификатор пользователя для получения доступа к системе:\n")
                 count = count + 1
 
-            print ("Вы ввели идентификатор " + userId + "\n")
             print("User: " + userId)
             print("Идентификация прошла успешно, добро пожаловать в систему")
             print("Перечень ваших прав:")
