@@ -1,6 +1,3 @@
-#import pandas as pd
-import matplotlib as mb;
-#import sklearn as sk;
 import random
 import class1_
 import sys

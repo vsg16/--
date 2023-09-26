@@ -1,23 +1,12 @@
-#import pandas as pd
-import matplotlib as mb;
-#import sklearn as sk;
 import random
 import sys
 
 class relation_safety_politics:
-    #available_operation = ["Чтение", "Запись", "Модификация"]
-    #Objects = 3
-    #Objects_files = ["Объект1", "Объект2", "Объект3"]
-    #Users = ["Пользователь123", "Босс", "Владислав", "Станислав", "Мухаммад"]
-
     def __init__(self, available_operation, Objects_files, Users):
-        self.available_operation = available_operation    # имя человека
-        self.Objects_files = Objects_files        # возраст человека
-        self.Users = Users        # возраст человека
+        self.available_operation = available_operation  
+        self.Objects_files = Objects_files   
+        self.Users = Users
 
-    #for i in Users:
-    #    for j in Objects_files:
-    #        rand_num = random.randrange(1, 4)
         rand_users_sprt = random.choice(self.available_operation)
         print (rand_users_sprt)
 
@@ -47,7 +36,6 @@ class relation_safety_politics:
                         print(A[i][j], end = '  ')
             print()                     # делаем переход на новую строку
 
-        #A.insert(0)
         # Строка для вставки в начало
         new_row = self.Objects_files
 
@@ -65,18 +53,10 @@ class relation_safety_politics:
         # Выводим измененный массив
         for row in A:
             print(row)
-
-
-        print("///////////////////////////////////////")
         for i in range(len(A)):         # len(A) - возвращает количество строк в матрице А
             for j in range(len(A[i])):  # len(A[i]) - возвращает количество элементов в строке i
                     print(f'{str(A[i][j]):<40}', end='')
             print()                     # делаем переход на новую строку
-
-        #print (available_operation)
-        #a = 5
-        #a = a + a
-        #print (a)
         return A
 
     def EnterSystem(self, A = []):
@@ -99,9 +79,7 @@ class relation_safety_politics:
                 userId = input("Введите идентификатор пользователя для получения доступа к системе:\n")
                 count = count + 1
 
-            #userId = input("Введите идентификатор пользователя для получения доступа к системе:\n")
             print ("Вы ввели идентификатор " + userId + "\n")
-                
             print("User: " + userId)
             print("Идентификация прошла успешно, добро пожаловать в систему")
             print("Перечень ваших прав:")
@@ -123,17 +101,21 @@ class relation_safety_politics:
             UserIDright=""
             index_to_right =""
             index_cols_to_rigth =""
-            #a = false
-            #if Action != "Далее":
             Action = input("Жду ваших указаний >")
+            while not Action in self.available_operation:
+                print("Введенная операция не соответствует ни одной из возможных")
+                Action = input("Жду ваших указаний >")
+                if Action == "Выход":
+                    sys.exit()                         
+                elif Action == "Далее":
+                    break
+
             if Action == "Выход":
                 print("Работа пользователя " + userId + " завершена. До свидания.")        
                 sys.exit()
-            if Action != "Передача прав":
+            if (Action != "Передача прав" and (Action == "Чтение" or Action == "Запись" or Action == "Модификация")):
                 if (count_psb_acts > -1):
-                    #while (Action != "Выход" or Action_object != "Выход" or Action != "Далее" or Action_object != "Далее"):
                         if (Action != "Выход" or Action_object != "Выход"):
-                            #Action = input("Жду ваших указаний >")
                             while not Action in self.available_operation:
                                 print("Введенная операция не соответствует ни одной из возможных")
                                 Action = input("Жду ваших указаний >")
@@ -141,8 +123,6 @@ class relation_safety_politics:
                                     sys.exit()                         
                                 elif Action == "Далее":
                                     break
-                                    #print("Работа пользователя" + userId + " завершена. До свидания.")
-                                # print("Работа пользователя" + userId + " завершена. До свидания.")
                             if Action_object != "Далее":
                                 Action_object = input("Над каким объектом призводится операция?")
 
@@ -150,11 +130,9 @@ class relation_safety_politics:
                                 print("Введенный объект не существует")
                                 Action_object = input("Над каким объектом призводится операция?")
                                 if Action_object == "Выход":
-                                    #print("Работа пользователя" + userId + " завершена. До свидания.")
                                     sys.exit()
                                 elif Action_object == "Далее":
                                     break
-                                    #print("Работа пользователя" + userId + " завершена. До свидания.")
 
                             if Action == "Выход" or Action_object == "Выход":
                                 print("Работа пользователя " + userId + " завершена. До свидания.")        
@@ -166,7 +144,6 @@ class relation_safety_politics:
                         
                             if Action in A[index][index_cols]:
                                 print("Операция над "+Action_object + " прошла успешно")
-                                #if Action == "Передача прав"
                             else:
                                 print("Отказ в выполнении операции. У Вас нет прав для ее осуществления")
                         else:
@@ -188,7 +165,6 @@ class relation_safety_politics:
                     print("Введенный объект не существует")
                     Action_object = input("Право на какой объект передается?")
                     if Action_object == "Выход":
-                        #print("Работа пользователя" + userId + " завершена. До свидания.")
                         sys.exit()
                     
                 for j in range (len(A[0])):
@@ -221,9 +197,6 @@ class relation_safety_politics:
                         if User_to_right == "Выход":
                             print("Работа пользователя" + userId + " завершена. До свидания.")
                             sys.exit()
-                    print (A[index][index_cols])
-                    print (Action_object_right + "////////////////////////////")
-                    print (A[index_to_right][index_cols])
                     if Action_object_right in A[index][index_cols]:
                         (A[index][index_cols]).remove(Action_object_right)
                         if not Action_object_right in A[index_to_right][index_cols]:
@@ -234,7 +207,6 @@ class relation_safety_politics:
                             elif (Action_object_right == "Модификация"):
                                 (A[index_to_right][index_cols]).insert(2, Action_object_right)
                             elif (Action_object_right == "Модификация"):
-                                #A[index_to_right][index_cols] = (A[index][index_cols]).insert(Action_object_right, 3)
                                 (A[index_to_right][index_cols]).insert(3, Action_object_right)
                             elif (Action_object_right == "Передача прав"):
                                 (A[index_to_right][index_cols]).insert(4, Action_object_right)
@@ -244,8 +216,7 @@ class relation_safety_politics:
                         print("Отказ в выполнении операции. У Вас нет прав для ее осуществления или в принципе нет передаваемого права")
         
 
-            right_first = 0
-            print("/////////////////////////123412341234123412341234123412342134123421341234123412341234123421341234123412341234")  
+            right_first = 0 
             for i in range(len(A)):         # len(A) - возвращает количество строк в матрице А
                 for j in range(len(A[i])):  # len(A[i]) - возвращает количество элементов в строке i
                             print(A[i][j], end = '  ')
